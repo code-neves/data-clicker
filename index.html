@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Clicker</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+</head>
+<body>
+    <div class="container">
+        <div class="column" id="left-column">
+            <h1 id="game-title"></h1>
+            <header class="game-header">
+                <div class="stats-bar">
+                    <div id="totalData"></div>
+                    <div id="dataPerSecond"></div>
+                </div>
+                <div class="header-icons">
+                    <div id="settings-button" class="header-icon" title="Configurações">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M19.479,10.092c-0.262-0.94-0.633-1.822-1.112-2.634l1.483-1.483c0.293-0.293,0.293-0.768,0-1.061l-2.121-2.121 c-0.293-0.293-0.768-0.293-1.061,0l-1.483,1.483c-0.812-0.479-1.694-0.85-2.634-1.112L12.459,1.03c-0.032-0.418-0.388-0.737-0.806-0.737h-3.306c-0.418,0-0.774,0.319-0.806,0.737l-0.09,3.134c-0.94,0.262-1.822,0.633-2.634,1.112L3.334,4.793c-0.293,0.293-0.768,0.293-1.061,0L0.152,6.914c-0.293,0.293-0.293,0.768,0,1.061l1.483,1.483c-0.479,0.812-0.85,1.694-1.112,2.634L0.293,12.19c-0.032,0.418,0.287,0.774,0.705,0.806l3.134,0.09c0.262,0.94,0.633,1.822,1.112,2.634l-1.483,1.483c-0.293,0.293-0.293,0.768,0,1.061l2.121,2.121c0.293,0.293,0.768,0.293,1.061,0l1.483-1.483c0.812,0.479,1.694,0.85,2.634,1.112l0.09,3.134c0.032,0.418,0.388,0.737,0.806,0.737h3.306c0.418,0,0.774-0.319,0.806-0.737l0.09-3.134c0.94-0.262,1.822-0.633,2.634-1.112l1.483,1.483c0.293,0.293,0.768,0.293,1.061,0l2.121-2.121c0.293-0.293,0.293-0.768,0-1.061l-1.483-1.483c0.479-0.812,0.85-1.694,1.112-2.634l3.134-0.09c0.418-0.032,0.737-0.388,0.705-0.806L19.479,10.092z M11.5,15.5c-2.206,0-4-1.794-4-4s1.794-4,4-4s4,1.794,4,4S13.706,15.5,11.5,15.5z"></path></svg>
+                    </div>
+                    <div id="trophy-button" class="header-icon" title="Ver Conquistas">🏆</div>
+                </div>
+            </header>
+            
+            <main class="click-area">
+                <button id="clickButton"></button>
+            </main>
+
+            <section class="game-section">
+                <h2 id="devices-title"></h2>
+                <div id="storageDevices" class="card-grid"></div>
+            </section>
+        </div>
+
+        <div class="column" id="right-column">
+             <section class="game-section">
+                <h2 id="upgrades-title"></h2>
+                <div id="upgradesList" class="card-list"></div>
+            </section>
+        </div>
+    </div>
+
+    <div id="info-modal" class="modal-backdrop hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="info-modal-title">Informação</h2>
+                <span class="modal-close" id="info-modal-close">&times;</span>
+            </div>
+            <p id="info-modal-text"></p>
+        </div>
+    </div>
+
+    <div id="achievements-modal" class="modal-backdrop hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="achievements-title">Conquistas</h2>
+                <span class="modal-close" id="achievements-modal-close">&times;</span>
+            </div>
+            <div id="achievementsList" class="card-list modal-list"></div>
+        </div>
+    </div>
+
+    <div id="settings-modal" class="modal-backdrop hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="settings-title">Configurações</h2>
+                <span class="modal-close" id="settings-modal-close">&times;</span>
+            </div>
+            <div class="settings-content">
+                <div class="setting-item">
+                    <label id="label-shadows" for="shadowsToggle">Efeitos visuais</label>
+                    <input type="checkbox" id="shadowsToggle" class="toggle-switch">
+                </div>
+                <div class="setting-item">
+                    <label id="label-floating" for="floatingTextToggle">Texto flutuante</label>
+                    <input type="checkbox" id="floatingTextToggle" class="toggle-switch">
+                </div>
+                 <div class="setting-item">
+                    <label id="label-numberFormat" for="numberFormatSelect">Formato dos números</label>
+                    <select id="numberFormatSelect">
+                        <option value="short">Abreviado (Padrão)</option>
+                        <option value="long">Completo</option>
+                    </select>
+                </div>
+                <div class="setting-item">
+                    <label id="label-autosave" for="autoSaveIntervalSelect">Salvar automaticamente</label>
+                    <select id="autoSaveIntervalSelect">
+                        <option value="30000">A cada 30 segundos</option>
+                        <option value="60000">A cada 1 minuto</option>
+                        <option value="300000">A cada 5 minutos</option>
+                        <option value="0">Nunca</option>
+                    </select>
+                </div>
+                <hr>
+                <button id="saveButton" class="control-button"></button>
+                <button id="resetButton" class="control-button button-danger"></button>
+            </div>
+        </div>
+    </div>
+    
+    <div id="reset-confirm-modal" class="modal-backdrop hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="reset-confirm-title"></h2>
+            </div>
+            <p id="reset-confirm-text"></p>
+            <div class="modal-actions">
+                <button id="cancel-reset-button" class="control-button"></button>
+                <button id="confirm-reset-button" class="control-button button-danger"></button>
+            </div>
+        </div>
+    </div>
+
+
+    <div id="notification-container"></div>
+    <!-- New containers for popups -->
+    <div id="autosave-toast-container"></div>
+    <div id="did-you-know-container"></div>
+    
+    <script type="module" src="js/script.js"></script>
+</body>
+</html>
